@@ -1,4 +1,4 @@
-from nltk import text
+# from nltk import text
 from transformers import pipeline
 import pandas as pd
 import numpy as np
@@ -8,7 +8,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
 
-class  eng_news_zero_shot_model_pred():
+class  hindi_news_zero_shot_model_pred():
     def __init__(self) -> None:
         self.classifier = pipeline("zero-shot-classification",model = "joeddav/xlm-roberta-large-xnli")
         super().__init__()
@@ -21,14 +21,14 @@ class  eng_news_zero_shot_model_pred():
         text = re.sub('[%s]' % re.escape(string.punctuation), '', text)
         text = re.sub('\n', '', text)
         text = re.sub('\w*\d\w*', '', text)
-        stop_words = set(stopwords.words('english'))
+        
         word_tokens = word_tokenize(text)
         filtered_sentence = ''
 
         for w in word_tokens:
-            if w not in stop_words and len(filtered_sentence) == 0:
+            if  len(filtered_sentence) == 0:
                 filtered_sentence += w
-            elif w not in stop_words and len(filtered_sentence) != 0:
+            elif  len(filtered_sentence) != 0:
                 filtered_sentence += ' '+w
         
         
@@ -36,10 +36,12 @@ class  eng_news_zero_shot_model_pred():
 
     def predict(self, text):
         candidate_labels = ["real", "fake"]
-        question = "This news article is {}"
+        question = "यह समाचार लेख {} है "
         text = self.wordopt(text)
         return self.classifier(text,candidate_labels,hypothesis_template =question)
 
-test_obj = eng_news_zero_shot_model_pred()
+if __name__ == "__main__":
 
-print(test_obj.predict(text= "This is fake news"))
+    test_obj = hindi_news_zero_shot_model_pred()
+
+    print(test_obj.predict(text= "हाल ही में एक हिन्दू महिला को एक कश्मीरी मुस्लिम लड़की को सहरी खिलाने पर आरएसएस के गुंडों ने पीटा| भारत आरएसएस के कब्जे में है| उनका मीडिया, लॉ एनफोर्समेंट, जुडिशरी और राष्ट्रिय सुरक्षा पर पूरा नियंत्रण है| क्या यह देश स्थिर रहेगा यदि ऐसा ही चलता रहा तो?"))

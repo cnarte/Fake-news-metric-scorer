@@ -40,6 +40,8 @@ class  eng_news_zero_shot_model_pred():
         text = self.wordopt(text)
         return self.classifier(text,candidate_labels,hypothesis_template =question)
 
-test_obj = eng_news_zero_shot_model_pred()
+if __name__ == "__main__":
 
-print(test_obj.predict(text= "This is fake news"))
+    test_obj = eng_news_zero_shot_model_pred()
+
+    print(test_obj.predict(text= "This is fake news"))
