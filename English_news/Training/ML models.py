@@ -149,7 +149,7 @@ RFC = RandomForestClassifier(random_state=0)
 RFC.fit(xv_train,y)
 
 # %%
-pip install xgboost
+
 
 # %%
 from xgboost import XGBClassifier
@@ -166,7 +166,7 @@ LGB = lgb.LGBMClassifier()
 LGB.fit(xv_train,y)
 
 # %%
-pip install sklearn
+
 
 # %%
 import joblib
