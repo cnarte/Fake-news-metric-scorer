@@ -690,3 +690,7 @@ transformers == 4.12.5
 
 # final_project/English_news/Training/ML models.py: 155
 xgboost == 1.5.0
+
+--find-links https://download.pytorch.org/whl/torch_stable.html
+
+torch
